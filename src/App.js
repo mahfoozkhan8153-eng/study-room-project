@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import io from 'socket.io-client';
 
-const BACKEND_URL = 'http://localhost:5000';
+const BACKEND_URL = window.location.origin;
 const socket = io(BACKEND_URL);
 
 function App() {
@@ -222,7 +222,6 @@ function App() {
     }
   };
 
-  // Updated File Upload using FormData
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file || !activeRoom) return;
