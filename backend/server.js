@@ -180,7 +180,6 @@ io.on('connection', (socket) => {
     const room = rooms.find(r => r.roomId === roomId);
     if (room) {
       room.quiz = quizData;
-      io.to(roomId).include?.(roomId);
       io.to(roomId).emit('receive-quiz', quizData);
     }
   });
@@ -213,11 +212,11 @@ io.on('connection', (socket) => {
   });
 });
 
-// --- Serve React Frontend in Production ---
+// --- Serve React Frontend in Production (Updated Path) ---
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.use(express.static(path.join(__dirname, '../client/build')));
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
   });
 }
 
